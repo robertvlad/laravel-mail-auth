@@ -11,7 +11,7 @@ use App\Models\Technology;
 
 class Post extends Model
 {
-    protected $fillable = ['title', 'content', 'slug', 'type_id'];
+    protected $fillable = ['title', 'content', 'slug', 'type_id', 'cover_image'];
 
     use HasFactory;
 

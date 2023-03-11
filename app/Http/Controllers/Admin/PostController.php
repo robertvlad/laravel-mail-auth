@@ -9,6 +9,7 @@ use App\Http\Requests\UpdatePostRequest;
 use App\Models\Technology;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Type;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -50,6 +51,12 @@ class PostController extends Controller
         $slug = Post::generateSlug($request->title);
 
         $form_data['slug'] = $slug;
+        
+        if ($request->has('cover_image')) {
+            $path = Storage::disk('public')->put('post_images', $request->cover_image);
+
+            $form_data['cover_image'] = $path;
+        }
 
         $newPost = Post::create($form_data);
 

@@ -27,7 +27,8 @@ class StorePostRequest extends FormRequest
             'title' => ['required', 'unique:posts', 'max:150'],
             'content' => ['nullable'],
             'type_id' => ['nullable', 'exists:types,id'],
-            'technologies' => ['exists:technologies,id']
+            'technologies' => ['exists:technologies,id'],
+            'cover_image' => ['nullable', 'image', 'max:250']
         ];
     }
 
@@ -43,7 +44,9 @@ class StorePostRequest extends FormRequest
             'title.unique' => 'E\' gia presente un post con questo titolo',
             'title.max' => 'Il titolo deve essere inferiore ai :max caratteri',
             'type_id.exists' => 'Seleziona una tipologia valida',
-            'technologies.exists' => 'Seleziona una technology valida'
+            'technologies.exists' => 'Seleziona una technology valida',
+            'cover_image.image' => 'inserire un formato di immagine valido',
+            'cover_image.max' => 'Il path dell\'immagine è superiore ai :max caratteri'
         ];
     }
 }

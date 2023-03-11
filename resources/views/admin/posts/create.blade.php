@@ -56,6 +56,9 @@
                     <div class="from-group my-3">
                         <label class="control-label">Copertina</label>
                         <input type="file" name="cover_image" id="cover-image" class="form-control @error('cover_image')is-invalid @enderror">
+                        @error('cover_image')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group my-2">
                         <button type="submit" class="btn btn-success">Salva</button>                        
