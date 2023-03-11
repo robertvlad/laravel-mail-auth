@@ -28,7 +28,7 @@ class StorePostRequest extends FormRequest
             'content' => ['nullable'],
             'type_id' => ['nullable', 'exists:types,id'],
             'technologies' => ['exists:technologies,id'],
-            'cover_image' => ['nullable', 'image', 'max:250']
+            'cover_image' => ['nullable', 'image']
         ];
     }
 
@@ -46,7 +46,6 @@ class StorePostRequest extends FormRequest
             'type_id.exists' => 'Seleziona una tipologia valida',
             'technologies.exists' => 'Seleziona una technology valida',
             'cover_image.image' => 'inserire un formato di immagine valido',
-            'cover_image.max' => 'Il path dell\'immagine è superiore ai :max caratteri'
         ];
     }
 }

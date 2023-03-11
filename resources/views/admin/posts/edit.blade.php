@@ -21,7 +21,7 @@
                 </div>
             @endif
             <div>
-                <form action="{{ route('admin.posts.update', ['post' => $post['slug']])}}" method="POST">
+                <form action="{{ route('admin.posts.update', ['post' => $post['slug']])}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="form-group">
@@ -33,7 +33,7 @@
                     </div>
                     <div class="form-group">
                         <label class="control-label">CONTENUTO</label>
-                        <textarea name="content" id="content" cols="30" rows="10" placeholder="Contenuto" class="form-control">{{ old('title') ?? $post['title']}}</textarea>
+                        <textarea name="content" id="content" cols="30" rows="10" placeholder="Contenuto" class="form-control">{{ old('content') ?? $post['content']}}</textarea>
                     </div>
                     <div class="form-group my-3">
                         <label class="control-label">Tipo </label>
@@ -61,6 +61,14 @@
 
                         @error('technologies')
                             <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="from-group my-3">
+                        <label class="control-label">Copertina precedente</label>
+                        <img src="{{ asset('storage/' .$post->cover_image ) }}" class="w-25 my-3">
+                        <input type="file" name="cover_image" id="cover-image" class="form-control @error('cover_image')is-invalid @enderror">
+                        @error('cover_image')
+                            <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="form-group my-2">
