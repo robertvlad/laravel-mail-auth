@@ -10,6 +10,9 @@ use App\Models\Technology;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Type;
 use Illuminate\Support\Facades\Storage;
+use App\Mail\NewContact;
+use App\Models\Lead;
+use Illuminate\Support\Facades\Mail;
 
 class PostController extends Controller
 {
@@ -63,6 +66,16 @@ class PostController extends Controller
         if($request->has('technologies')) {
             $newPost->technoligies()->attach($request->technologies);
         }
+
+        $new_lead = new Lead();
+
+        $new_lead->title  = $form_data['title'];
+        $new_lead->content  = $form_data['content'];
+        $new_lead->slug  = $form_data['slug'];
+
+        $new_lead->save();
+
+        Mail::to('info@boolpress.com')->send(new NewContact($new_lead));
 
         return redirect()->route('admin.posts.show', ['post' => $newPost['slug']])->with('message', 'Post creato correttamente');
     }
